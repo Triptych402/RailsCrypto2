@@ -1,0 +1,63 @@
+<h2 style="font-family: 'Nanum Gothic', sans-serif; font-weight: bold">
+  마이포트폴리오
+</h2>
+
+<br/>
+
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>코인명</th>
+      <th>투자금</th>
+      <th>실시간 평단</th>
+      
+      <th>보유코인</th>
+      <th>평가금액</th>
+      <th>손익</th>          
+    </tr>
+  </thead>
+
+
+  <tbody>
+    <% @coins.each do |coin| %>
+            <% if coin.user_id == current_user.id %>
+            <% if coin.symbol %>
+                <% coin.symbol = coin.symbol.upcase %>
+            <% end %>
+             <tr>
+            <% for x in @lookup_coin['data'] %>
+            
+            <% if coin.symbol == x['symbol'] %>
+                <td><%= link_to x['name'], coin%></td>
+                <td><%= number_to_currency(coin.cost_per * coin.amount_owned, :unit => "₩") %></td>
+                <td><%= number_to_currency(x['quote']['KRW']['price'].to_d(4), :unit => "₩") %></td>
+                
+                <td><%= number_to_currency(coin.amount_owned, :unit => "") %></td>
+                <td><%= number_to_currency(x['quote']['KRW']['price'].to_d(4) * coin.amount_owned, :unit => "₩") %></td>
+                <td><%= number_to_currency((x['quote']['KRW']['price'].to_d(4) * coin.amount_owned) - (coin.cost_per * coin.amount_owned), :unit => "₩") %></td>
+
+
+
+                <% @profit_loss += (x['quote']['KRW']['price'].to_d(4) * coin.amount_owned) - (coin.cost_per * coin.amount_owned) %>
+                <% @profit_total += x['quote']['KRW']['price'].to_d(4) * coin.amount_owned %>
+                <% @invest_total += coin.cost_per * coin.amount_owned %>
+
+            <% end %>
+            <% end %>
+               <% coin.cost_per %>
+        </tr>
+        <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br/>
+<br/>
+<strong>전체 투자금: </strong> <%= number_to_currency(@invest_total, :unit => "₩") %>
+<br/>
+<strong>전체 손익: </strong> <%= number_to_currency(@profit_loss, :unit => "₩") %>
+<br/>
+<strong>보유자산: </strong> <%= number_to_currency(@profit_total, :unit => "₩") %>
+<br/>
+<br/>
+<%= link_to '코인 추가', new_coin_path, class: "btn btn-default" %>

@@ -1,0 +1,45 @@
+<% for x in @show_coin['data'] %>
+ 
+     <% if @coin.symbol.upcase == x['symbol'] %>
+         <% crypto_name = x['name'] %>
+         <% crypto_price = x['quote']['KRW']['price'] %><br/>
+         <% crypto_rank = x['cmc_rank'] %> <br/><br/>
+     <% end %>
+ <% end %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= crypto_name %></h3>
+  </div>
+  <div class="panel-body">
+    
+
+
+<h3><%= @coin.symbol.upcase %></h3>
+
+
+<p>
+	<strong>현재가: </strong> <%= number_to_currency(crypto_price, :unit => "₩") %>
+</p>
+
+<p>
+	<strong>순위: </strong> <%= crypto_rank %>
+</p>
+
+
+  <% @coin.cost_per %>
+
+<p>
+  <strong>내 보유 갯수:</strong>
+  <%= @coin.amount_owned %>
+</p>
+  
+</div>
+ <div class="panel-footer">
+	<%= link_to '수정', edit_coin_path(@coin) %> |
+	<%= link_to '코인 삭제', coin_path(@coin), method: :delete, data: { confirm: 'Are you sure?' }%> |
+	<%= link_to '마이포트폴리오', coins_path %>
+	
+</div>
+</div>
+

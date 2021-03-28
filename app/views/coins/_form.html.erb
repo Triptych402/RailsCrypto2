@@ -1,0 +1,47 @@
+<div class="panel panel-default">
+ 
+  <div class="panel-body">
+  <div class="form-group">
+
+<%= form_with(model: coin) do |form| %>
+  <% if coin.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(coin.errors.count, "error") %> prohibited this coin from being saved:</h2>
+
+      <ul>
+        <% coin.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field">
+    <%= form.label :symbol %>
+    <%= form.text_field :symbol, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    
+    <%= form.number_field :user_id, value: current_user.id, type: "hidden"  %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cost_per %>
+    <%= form.text_field :cost_per, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :amount_owned %>
+    <%= form.text_field :amount_owned, class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+</div>
+</div>
+</div>

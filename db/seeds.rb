@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Coin.create([
+  { market: '업비트'    },
+  { market: '코인원'     },
+  { market: '바이낸스'    },
+  { market: '비트프론트'   }
+])

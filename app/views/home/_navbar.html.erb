@@ -14,15 +14,30 @@
       </button>
 
       <%= link_to "코인 포트폴리오", root_path, class: "navbar-brand", style: "font-family: 'Do Hyeon', sans-serif;" %>
-             
-    </div>
 
+    </div>
+    
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       
       
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
+
+
+         <% if user_signed_in? %>
+
+          <li><%= link_to "코인추가", new_coin_path %></li>
+          <li><%= link_to "마이포트폴리오", coins_path %></li>
+
+          <li><%= link_to "로그아웃", destroy_user_session_path, method: :delete %></li>
+          <li><%= link_to "계정", edit_user_registration_path %></li>
+        <% else %>
+          <li><%= link_to "등록", new_user_registration_path %></li>
+          <li><%= link_to "로그인",  new_user_session_path %></li>
+          
+        <% end %>
+
+
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

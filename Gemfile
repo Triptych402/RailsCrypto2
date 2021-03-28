@@ -29,6 +29,9 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'devise', '~> 4.7', '>= 4.7.3'
+gem 'nokogiri', '~> 1.11', '>= 1.11.2'
+gem 'money', '~> 6.14', '>= 6.14.1'
+gem 'google_currency', '~> 3.4', '>= 3.4.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
